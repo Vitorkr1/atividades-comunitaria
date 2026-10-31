@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Agenda Comunitária: organize encontros, oficinas e atividades da comunidade. Projeto de Node.js por Vitor.">
+  <meta name="theme-color" content="#234d3c">
+  <title>Agenda Comunitária | Projeto de Node.js</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23234d3c'/%3E%3Cpath d='M17 22h30v27H17zM17 30h30M24 16v12m16-12v12' fill='none' stroke='%23f8f6ef' stroke-width='3'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="project-brand">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none"><rect x="6" y="8" width="20" height="20" rx="2"/><path d="M6 14h20M11 4v8M21 4v8M11 19h3m4 0h3m-10 5h3"/></svg>
+        </span>
+        <p>Projeto de Node.js | CRUD Completo</p>
+      </div>
+      <nav class="author-links" aria-label="Links de Vitor">
+        <a href="https://www.instagram.com/_vitorkr/" target="_blank" rel="noopener noreferrer">@_Vitorkr <span aria-hidden="true">↗</span></a>
+        <a href="https://portifolio-vitor-dev.online/" target="_blank" rel="noopener noreferrer">Portfólio <span aria-hidden="true">↗</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo" class="container">
+    <section class="intro" aria-labelledby="tituloPagina">
+      <div>
+        <h1 id="tituloPagina">Agenda Comunitária</h1>
+        <p class="intro-text">Cadastre e consulte as atividades da comunidade.</p>
+      </div>
+      <a class="button button-primary intro-action" href="#cadastro">Cadastrar atividade</a>
+    </section>
+
+    <nav class="section-nav" aria-label="Seções da agenda">
+      <a href="#atividades">Atividades</a>
+      <a href="#busca">Buscar por ID</a>
+      <a href="#cadastro">Cadastrar</a>
+      <a href="#edicao">Atualizar</a>
+      <a href="#exclusao">Excluir</a>
+    </nav>
+
+    <div class="consult-grid">
+      <section id="atividades" class="activity-section" aria-labelledby="tituloAtividades">
+        <div class="section-heading list-heading">
+          <div>
+            <h2 id="tituloAtividades">Atividades cadastradas</h2>
+          </div>
+          <!-- Este botão mantém o ID utilizado pelo GET do script original. -->
+          <button id="btnListar" type="button" class="button button-outline">
+            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M16 7a6.4 6.4 0 1 0 .2 5M16 3v4h-4"/></svg>
+            Listar atividades
+          </button>
+        </div>
+        <div id="lista" class="activity-list" role="status" aria-live="polite" aria-atomic="true">
+          <div class="empty-state">
+            <h3>Nenhuma consulta realizada</h3>
+            <p>Clique em “Listar atividades” para carregar os registros.</p>
+          </div>
+        </div>
+        <p class="section-footnote">Cada atividade tem um ID. Use esse número para buscar, atualizar ou excluir um registro.</p>
+      </section>
+
+      <section id="busca" class="search-section" aria-labelledby="tituloBusca">
+        <h2 id="tituloBusca">Buscar atividade</h2>
+        <p class="section-description">Consulte uma atividade pelo ID.</p>
+        <div class="field search-field">
+          <label for="buscarId">ID da atividade</label>
+          <div class="inline-field">
+            <input id="buscarId" name="buscarId" type="number" min="1" step="1" placeholder="Ex.: 12" inputmode="numeric">
+            <button id="btnBuscar" type="button" class="button button-primary">Buscar</button>
+          </div>
+        </div>
+        <div id="resultadoBusca" class="search-result" role="status" aria-live="polite" aria-atomic="true">
+          <p class="result-hint">Os detalhes da atividade aparecem aqui.</p>
+        </div>
+      </section>
+    </div>
+
+    <div class="forms-grid">
+      <section id="cadastro" class="form-section" aria-labelledby="tituloCadastro">
+        <div class="section-heading">
+          <h2 id="tituloCadastro">Cadastrar atividade</h2>
+          <p class="section-description">Preencha os dados para adicionar uma atividade.</p>
+        </div>
+        <form id="formAtividades" class="activity-form">
+          <p class="form-note">Todos os campos são obrigatórios.</p>
+          <div class="field">
+            <label for="titulo">Título da atividade</label>
+            <input id="titulo" name="titulo" type="text" placeholder="Ex.: Oficina de horta comunitária" required>
+          </div>
+          <div class="field">
+            <label for="local">Local</label>
+            <input id="local" name="local" type="text" placeholder="Ex.: Associação de moradores" required>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="data">Data do evento</label>
+              <input id="data" name="data_evento" type="date" required>
+            </div>
+            <div class="field">
+              <label for="vagas">Número de vagas</label>
+              <input id="vagas" name="vagas" type="number" min="1" step="1" placeholder="Ex.: 20" inputmode="numeric" required>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="button button-primary">Cadastrar atividade</button>
+          </div>
+          <p id="mensagemCadastro" class="feedback" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <section id="edicao" class="form-section edit-section" aria-labelledby="tituloEdicao">
+        <div class="section-heading">
+          <h2 id="tituloEdicao">Atualizar atividade</h2>
+          <p class="section-description">Informe o ID e os dados que deseja salvar.</p>
+        </div>
+        <form id="formAtualizar" class="activity-form">
+          <p class="form-note">Informe o ID e preencha todos os novos dados.</p>
+          <div class="field id-field">
+            <label for="atualizarId">ID da atividade</label>
+            <input id="atualizarId" name="atualizarId" type="number" min="1" step="1" placeholder="Ex.: 12" inputmode="numeric" required>
+          </div>
+          <div class="field">
+            <label for="atualizarTitulo">Título da atividade</label>
+            <input id="atualizarTitulo" name="titulo" type="text" placeholder="Informe o título atualizado" required>
+          </div>
+          <div class="field">
+            <label for="atualizarLocal">Local</label>
+            <input id="atualizarLocal" name="local" type="text" placeholder="Informe o local atualizado" required>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="atualizarData">Data do evento</label>
+              <input id="atualizarData" name="data_evento" type="date" required>
+            </div>
+            <div class="field">
+              <label for="atualizarVagas">Número de vagas</label>
+              <input id="atualizarVagas" name="vagas" type="number" min="1" step="1" placeholder="Ex.: 20" inputmode="numeric" required>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="button button-outline">Salvar alterações</button>
+          </div>
+          <p id="mensagemAtualizar" class="feedback" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+    </div>
+
+    <section id="exclusao" class="delete-section" aria-labelledby="tituloExclusao">
+      <div class="delete-copy">
+        <h2 id="tituloExclusao">Excluir atividade</h2>
+        <p>Informe o ID do registro que deseja remover.<br>Você poderá confirmar antes da exclusão.</p>
+      </div>
+      <div class="delete-controls">
+        <div class="field">
+          <label for="excluirId">ID da atividade</label>
+          <div class="inline-field">
+            <input id="excluirId" name="excluirId" type="number" min="1" step="1" placeholder="Ex.: 12" inputmode="numeric" aria-describedby="avisoExclusao">
+            <button id="btnExcluir" type="button" class="button button-danger">
+              <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3 5h14M7 5V3h6v2M5 5l1 12h8l1-12M8 8v6m4-6v6"/></svg>
+              Excluir atividade
+            </button>
+          </div>
+        </div>
+        <p id="avisoExclusao" class="delete-hint">A exclusão é permanente.</p>
+        <p id="mensagemExcluir" class="feedback" role="status" aria-live="polite"></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer container">
+    <p>Desenvolvido por Vitor</p>
+    <a href="https://portifolio-vitor-dev.online/" target="_blank" rel="noopener noreferrer">Portfólio de Vitor</a>
+  </footer>
+</body>
+</html>
