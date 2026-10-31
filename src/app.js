@@ -1,6 +1,8 @@
 const express = require('express')
 const pool = require('../db/db.js')
 const app = express()
+const PORT = process.env.PORT || 3000
+
 app.use(express.json())
 app.use(express.static('public'))
 
@@ -82,4 +84,6 @@ app.delete('/atividades/:id', async (req,res) => {
     res.status(500).json({message:"erro 500 no servidor"})
   }
 })
-app.listen(3000)
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Servidor iniciado na porta ${PORT}`)
+})
