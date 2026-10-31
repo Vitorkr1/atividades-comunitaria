@@ -2,8 +2,7 @@ const mysql = require('mysql2/promise')
 const fs = require('node:fs')
 const path = require('node:path')
 
-// Configure as variáveis DB_* no serviço da API no Render.
-// Salve o certificado CA baixado da Aiven como ca.pem nesta pasta.
+
 const pool = mysql.createPool({
   connectionLimit: 10,
   waitForConnections: true,
