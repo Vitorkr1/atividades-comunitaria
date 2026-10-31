@@ -1,9 +1,8 @@
 
-const API = 'http://localhost:3000/atividades'
+const API = 'https://atividades-comunitaria.onrender.com/atividades'
 
 const lista = document.getElementById('lista')
 
-// Função auxiliar para exibir uma atividade com segurança
 function mostrarAtividade(container, atividade) {
   const bloco = document.createElement('div')
 
