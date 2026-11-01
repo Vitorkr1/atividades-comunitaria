@@ -12,6 +12,7 @@ app.get('/atividades', async (req,res) => {
     res.status(200).json(result)
 
   }catch (error){
+    console.error('Falha no MySQL:', error.code, error.message)
     res.status(500).json({message:'erro no servidor'})
   }
   
@@ -31,6 +32,7 @@ app.get('/atividades/:id', async (req,res) => {
   }
   res.status(200).json(rows[0])
   }catch (error){
+    console.error('Falha no MySQL:', error.code, error.message)
     res.status(500).json({message:'error no servidor'})
   }
 
@@ -46,6 +48,7 @@ app.post('/atividades', async (req,res) => {
     res.status(201).json({message:'dados inserido com sucesso!!'})
 
   }catch (error){
+    console.error('Falha no MySQL:', error.code, error.message)
     res.status(500).json({message:'error no servido'})
   }
   
@@ -64,6 +67,7 @@ app.put('/atividades/:id', async (req,res) => {
     }
     res.status(200).json({message:"os dados foram atualizado com sucesso!!!"})
   }catch (error){
+    console.error('Falha no MySQL:', error.code, error.message)
     res.status(500).json({message:"erro no servidor"})
   }
 })
@@ -81,6 +85,7 @@ app.delete('/atividades/:id', async (req,res) => {
     }
     res.status(200).json({message:"atividade excluida!!"})
   }catch (error){
+    console.error('Falha no MySQL:', error.code, error.message)
     res.status(500).json({message:"erro 500 no servidor"})
   }
 })
